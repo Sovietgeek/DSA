@@ -1,14 +1,25 @@
 class Solution {
     public int findDuplicate(int[] nums) {
-        boolean[] seen = new boolean[nums.length];
+        int low = 1;
+        int high = nums.length - 1;
 
-        for (int num : nums) {
-            if (seen[num]) {
-                return num; // Yeh number pehle aa chuka hai
+        while (low < high) {
+            int mid = low + (high - low) / 2;
+            int count = 0;
+
+            for (int num : nums) {
+                if (num <= mid) {
+                    count++;
+                }
             }
-            seen[num] = true;
+
+            if (count > mid) {
+                high = mid; // Duplicate [low, mid] range mein hai
+            } else {
+                low = mid + 1; // Duplicate [mid + 1, high] range mein hai
+            }
         }
 
-        return -1;
+        return low;
     }
 }
