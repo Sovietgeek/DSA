@@ -1,17 +1,14 @@
 class Solution {
     public int findDuplicate(int[] nums) {
-        int n = nums.length;
-        
-        Arrays.sort(nums);
+        boolean[] seen = new boolean[nums.length];
 
-        for (int i = 0; i < n-1; i++) {
-            if (nums[i] == nums[i + 1]) {
-                return nums[i];
-                
-
-            } 
+        for (int num : nums) {
+            if (seen[num]) {
+                return num; // Yeh number pehle aa chuka hai
+            }
+            seen[num] = true;
         }
-        return -1;
 
+        return -1;
     }
 }
